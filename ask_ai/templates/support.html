@@ -1,0 +1,43 @@
+{% extends "base_generic_gov.html" %}
+{% import "macros.html" as macros %}
+
+{% block head_title %}Support - {% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">Support</h1>
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Accessing Ask AI</h2>
+    <p>You can access your Ask AI account by visiting <a href="https://ask-ai.cabinetoffice.gov.uk" class="govuk-link">ask-ai.cabinetoffice.gov.uk</a>. You’ll need to sign in then put in your email address and select the submit button.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Signing in</h1>
+    <p>If you’re having trouble signing in to Ask AI, check that:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>you’re using your work email address</li>
+      <li>you’ve typed your work email address correctly</li>
+    </ul>
+    <p>You should check your junk or spam folder for an email from Ask AI.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Error messages</h2>
+    <h3 class="govuk-heading-s">This text has been flagged as potentially containing sensitive data. Are you sure this is an appropriate query?</h3>
+    <p>You need to review the prompt you have entered and make sure it is not sensitive before submitting. Sensitive data can be anything from a phone number through to a prompt that contains security information.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Bug or site vulnerability</h2>
+    <p>If you’ve found an issue or a vulnerability, contact us using the details at the bottom of this page including as much information as possible.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Website not loading</h2>
+    <p>If the website is not loading, please close the browser tab and try again later.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Contact us</h2>
+    <p>If you’ve read the information above but haven’t been able to find a solution to your problem, please email us at <a href="mailto:ask-ai-support@cabinetoffice.gov.uk" class="govuk-link">ask-ai-support@cabinetoffice.gov.uk</a> including as much information as possible.</p>
+  </div>
+{% endblock %}

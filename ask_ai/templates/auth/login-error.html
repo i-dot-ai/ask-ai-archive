@@ -1,0 +1,9 @@
+{% extends "auth/base.html" %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">An error has occurred</h1>
+  <p>{{errors}}</p>
+  <p>Please try again using <a class="govuk-link" href="{{ url('login') }}">this link</a>.</p>
+  <p>If this issue persists please contact our support email at <a href="mailto:{{ contact_email }}"
+                                                                   class="govuk-link">{{ contact_email }}</a></p>
+{% endblock %}

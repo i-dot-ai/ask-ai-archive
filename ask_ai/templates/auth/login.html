@@ -1,0 +1,20 @@
+{% extends "auth/base.html" %}
+
+{% block head_title %}Sign in - {% endblock %}
+
+{% block content %}
+
+  <section class="wrapper">
+      <h1 class="govuk-heading-l">
+        Sign in
+      </h1>
+      <p>Welcome to Ask AI, built by i.AI with help from 10DS, supported by Cabinet Office Digital.</p>
+      <p>You will only be able to access Ask AI if you are part of private beta. You can <a href="https://docs.google.com/forms/d/1f8LKRsd-ZNWtBBlpkvfxHGFpL5nU0WKKLp2xC9iMZx4" class="govuk-link">register your interest here</a>.</p>
+      <p>Sign in with your Cabinet Office email. Once signed in, you will be redirected back to Ask AI.</p>
+    <div class="govuk-button-group">
+      <a class="govuk-button" href="{{cola_url}}">Sign in</a>
+    </div>
+  </section>
+
+
+{% endblock %}

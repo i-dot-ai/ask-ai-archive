@@ -1,0 +1,121 @@
+:root {
+  --main-bg-color: #b62777;
+}
+
+#i-dot-ai .govuk-tag {
+  background-color: var(--main-bg-color);
+}
+
+#i-dot-ai .govuk-header__container {
+  border-bottom: 10px solid var(--main-bg-color);
+}
+
+#i-dot-ai .govuk-panel--confirmation {
+  color: #fff;
+  background-color: var(--main-bg-color);
+}
+
+#i-dot-ai .space-warning {
+  float: right;
+}
+
+#i-dot-ai .govuk-warning-text {
+  background-color: none;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+@media (min-width: 1020px) {
+  .i-ai-range.govuk-heading-xl {
+    margin-bottom: 0;
+  }
+
+  .i-ai-range.govuk-form-group {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .i-ai-range .govuk-fieldset__legend.govuk-fieldset__legend--m {
+    margin-right: 20px;
+  }
+
+  .i-ai-range .govuk-radios.govuk-radios--small {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .i-ai-range .govuk-radios__item {
+    width: 85px;
+    padding: 0px;
+    left: 28px;
+  }
+
+  .i-ai-range .govuk-radios__label {
+    text-indent: -10000px;
+  }
+}
+
+.loading-response {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.loading-text {
+  margin-right: 16px;
+  font-style: italic;
+}
+
+.running-icon {
+  height: 24px;
+  width: 24px;
+}
+
+/* roboto-regular - latin */
+@font-face {
+  font-display: fallback;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/roboto/roboto-v30-latin-regular.woff2') format("woff2"),
+  url('fonts/roboto/roboto-v30-latin-regular.woff') format("woff");
+}
+
+/* roboto-italic - latin */
+@font-face {
+  font-display: fallback;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/roboto/roboto-v30-latin-italic.woff2') format("woff2"),
+  url('fonts/roboto/roboto-v30-latin-italic.woff') format("woff");
+}
+
+/* roboto-700 - latin */
+@font-face {
+  font-display: fallback;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/roboto/roboto-v30-latin-700.woff2') format("woff2"),
+  url('fonts/roboto/roboto-v30-latin-700.woff') format("woff");
+}
+
+/* roboto-700italic - latin */
+@font-face {
+  font-display: fallback;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 700;
+  src: url('fonts/roboto/roboto-v30-latin-700italic.woff2') format("woff2"),
+  url('fonts/roboto/roboto-v30-latin-700italic.woff') format("woff");
+}
+
+#i-dot-ai * {
+  /* copy the fallback approach from govuk-frontend */
+  font-family: Roboto, arial, sans-serif;
+}

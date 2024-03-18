@@ -1,0 +1,11 @@
+*.pyc
+/staticfiles/
+db.sqlite3
+.env
+.DS_Store
+.secrets
+.venv
+.terraform
+.idea
+application.log
+.coverage

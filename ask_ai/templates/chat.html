@@ -1,0 +1,110 @@
+{% import "macros.html" as macros %}
+{% extends "base_generic_gov.html" %}
+
+{% block content %}
+  <h1 class="govuk-visually-hidden">Ask AI</h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third govuk-!-margin-bottom-3">
+      <div>
+        {{macros.start_new_query()}}
+      </div>
+      <h2 class="govuk-visually-hidden">Existing queries</h2>
+      <h3 class="govuk-heading-m">Today</h3>
+      <ul class="govuk-!-padding-left-3">
+        {% for chat in past_chats.today %}
+          <li>
+            <a class="plausible-event-name=Today+Chat" href="{{url("chat", kwargs={"chat_id": chat.id})}}"> {{chat.name}} <span class="govuk-visually-hidden">(previous query)</span></a>
+          </li>
+        {% endfor %}
+      </ul>
+      <hr class="govuk-section-break govuk-section-break--m">
+      <h3 class="govuk-heading-m">Previous queries</h3>
+      <ul class="govuk-!-padding-left-3">
+        {% for chat in past_chats.previous %}
+          <li>
+            <a class="plausible-event-name=Previous+Chat" href="{{url("chat", kwargs={"chat_id": chat.id})}}"> {{chat.name}} <span class="govuk-visually-hidden">(previous query)</span></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-visually-hidden">Current query</h2>
+      {% if api_error %}
+        {{macros.open_ai_api_error()}}
+      {% endif %}
+      <div>
+        {{macros.warning("You must check the response for accuracy")}}
+      </div>
+      {% for q in prompts %}
+        <p class="govuk-body">
+          <b>User: </b>{{q.user_prompt}}
+        </p>
+        {% if q.is_sensitive %}
+          {{macros.warning("This text contains sensitive data and has not been submitted")}}
+        {% elif q.user_prompt_moderated %}
+          {{macros.warning("This query has been moderated as containing inappropriate material")}}
+        {% elif q.ai_response_moderated %}
+          {{macros.warning("The AI response has been moderated for containing inappropriate material")}}
+        {% elif q.api_call_error %}
+          <p class="govuk-body govuk-!-font-weight-bold">No AI response due to error accessing ChatGPT</p>
+        {% else %}
+          <div class="govuk-body">
+            <p class="js-ai-response" tabindex="-1">
+              <b>Ask AI: </b>{{convert_markdown(q.ai_response, True) | safe}}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if sensitive_prompt %}
+        <div class="govuk-inset-text">
+          <b>User: </b>{{sensitive_prompt.user_prompt}}
+        </div>
+        <div class="js-ai-response" tabindex="-1">
+          {{macros.warning("This text has been flagged as potentially containing sensitive data.", link_text="Are you sure this is an appropriate query?", page_url="guidance")}}
+        </div>
+        <form method="POST" id="confirm-content-is-safe-form">
+            {{csrf_input}}
+          <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+              <div class="govuk-button-group">
+                <button class="govuk-button govuk-button--secondary plausible-event-name=Moderation+Confirm" data-module="govuk-button" name="not-sensitive" id="not-sensitive">
+                  I confirm I want to send this to ChatGPT
+                </button>
+                <button class="govuk-button plausible-event-name=Moderation+Edit" data-module="govuk-button" name="sensitive" id="sensitive">
+                  Edit my query
+                </button>
+              </div>
+              <div class="loading-response govuk-!-display-none" id="loading-response">
+                <p class="govuk-body loading-text" id="loading-text">Getting a response from ChatGPT...</p>
+                <img class="running-icon" src="{{static('/images/icon_running.gif')}}" alt="Loading a response icon">
+              </div>
+            </fieldset>
+          </div>
+        </form>
+      {% else %}
+        <form method="POST" id="ask-a-question-form">
+            {{csrf_input}}
+          <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                {% if not prompts.count() %}
+                  {{macros.textarea_chat(name="user_prompt", label="What would you like to ask?", errors=errors, data=data, required=true)}}
+                {% else %}
+                  {{macros.textarea_chat(name="user_prompt", label="What would you like to ask?", errors=errors, data=data, required=true, hideLabel=true)}}
+                {% endif %}
+              <div class="govuk-button-group">
+                <button class="govuk-button plausible-event-name=Ask+Click" data-module="govuk-button" name="ask" id="ask">
+                  Ask
+                </button>
+              </div>
+                  <div role="alert" class="loading-response govuk-!-display-none" id="loading-response">
+                    <p class="govuk-body loading-text" id="loading-text">Getting a response from ChatGPT...</p>
+                    <img class="running-icon" src="{{static('/images/icon_running.gif')}}" alt="">
+                  </div>
+            </fieldset>
+          </div>
+        </form>
+      {% endif %}
+    </body>
+  </div>
+</div>
+{% endblock %}

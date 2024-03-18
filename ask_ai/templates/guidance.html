@@ -1,0 +1,39 @@
+{% import "macros.html" as macros %}
+{% extends "base_generic_gov.html" %}
+
+{% block head_title %}Guidance - {% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">Guidance</h1>
+  <div class="govuk-body">
+    <p>CDDO has published <a class="govuk-link" href=https://www.gov.uk/government/publications/guidance-to-civil-servants-on-use-of-generative-ai/guidance-to-civil-servants-on-use-of-generative-ai>guidance</a> for how civil servants should interact with generative AI platforms. Much of this guidance is related to how to interact with platforms that are not delivered by the government.
+    <p>More specific guidance for use of Ask AI can be found by revisiting the <a class="govuk-link" href=https://intranet.cabinetoffice.gov.uk/task/data-protection-training/>training</a> avilable on the Cabinet Office intranet.</p>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Key points</h1>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>You should never input information that is classified, sensitive or reveals the intent of government (that may not be in the public domain) into any of these tools. You should have regard to the principles of GDPR.</li>
+      <li>Output from generative AI is susceptible to bias and misinformation, they need to be checked and cited appropriately.</li>
+      <li>When using the outputs from generative AI either verbatim or with minor alterations, it is important to make clear to those reading that generative AI has been used.</li>
+      <li>Remember, everything you enter into a platform while on duty makes it OFFICIAL material, and you are accountable for that content.</li>
+    </ul>
+  </div>
+
+  <div class="govuk-body">
+    <h2 class="govuk-heading-m">Prompt engineering</h1>
+    <ol class="govuk-list govuk-list--bullet">
+      <li>Clearly communicate what content or information is most important.</li>
+      <li>Structure the prompt: Start by defining its role, give context/input data, then provide the instruction.</li>
+      <li>Use specific, varied examples to help the model narrow its focus and generate more accurate results.</li>
+      <li>Use constraints to limit the scope of the model's output. This can help avoid meandering away from the instructions into factual inaccuracies.</li>
+      <li>Break down complex tasks into a sequence of simpler prompts.</li>
+      <li>Instruct the model to evaluate or check its own responses before producing them. ("Make sure to limit your response to 3 sentences", "Rate your work on a scale of 1-10 for conciseness", "Do you think this is correct?").</li>
+    </ol>
+    <p>Lots more information can be found online regarding <a class="govuk-link" href="https://developers.google.com/machine-learning/resources/prompt-eng">accurate prompt engineering</a>.</p>
+
+    <h3 class="govuk-heading-s">Got a good prompt?</h3>
+    <p>Please add it to our <a class="govuk-link" href="https://docs.google.com/spreadsheets/u/0/d/1F_LzgIrk-Kw966N18G6th1fqxr27EpZcfH1k_J5dpX0/edit">prompt library</a> to share with others.</p>
+  </div>
+
+{% endblock %}

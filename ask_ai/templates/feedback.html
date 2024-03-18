@@ -1,0 +1,24 @@
+{% import "macros.html" as macros %}
+{% extends "base_generic_gov.html" %}
+
+{% block content %}
+  <form method="post" novalidate>{{csrf_input}}
+    <h1 class="govuk-heading-l">Give feedback on Ask AI</h1>
+      <div class="govuk-body">
+        <p>To help us improve the service, we'd like to know more about your visit today.</p>
+        <p>Please note we're unable to respond to feedback.</p>
+        <p>If you have an error or fault, please visit the <a class="govuk-link" href="{{url('support')}}">support page</a>.</p>
+      </div>
+      <div>
+        <p>{{macros.radios(name="satisfaction", question="Overall, how do you feel about the service?", options=satisfaction_choices, data=data, errors=errors)}}</p>
+        <p>{{macros.textarea(name="improve_the_service", label="How could we improve the service? (optional)", hint="Do not include personal or financial information.", errors=errors, data=data)}}</p>
+        <p>{{macros.radios(name="take_part_in_user_research", question="Would you like to take part in user research to improve Ask AI?", options=ur_choices, data=data, errors=errors)}}</p>
+      </div>
+      <div>
+        <p class="govuk-body">
+          <input type="submit" value="Submit" class="govuk-button plausible-event-name=Feedback+Submit" data-module="govuk-button" />
+        </p>
+      </div>
+    </div>
+  </form>
+{% endblock %}

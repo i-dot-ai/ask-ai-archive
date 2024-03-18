@@ -1,0 +1,11 @@
+{% import "macros.html" as macros %}
+{% extends "base_generic_gov.html" %}
+
+{% block content %}
+  <form method="post" novalidate>{{csrf_input}}
+    {{macros.checkboxes(title="Declaration", options=options, data=data, errors=errors)}}
+    <p class="govuk-body">
+      <input type="submit" value="Submit" class="govuk-button" data-module="govuk-button" />
+    </p>
+  </form>
+{% endblock %}

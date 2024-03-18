@@ -1,0 +1,21 @@
+{% import "macros.html" as macros %}
+{% extends "base_generic_gov.html" %}
+
+{% block content %}
+  <form>
+    <div class="govuk-body">
+      <p class="govuk-body">
+        <strong class="govuk-tag--red">Warning</strong>
+        - Clicking download will download all chat data from Ask AI. This is sensitive and should be stored in the G Drive and deleted from local storage as soon as possible. Access to data is for i.AI, if you intend to share more widely, please consult Sam Hoskin.
+      </p>
+    </div>
+    <div>
+      <button name="csv" type="submit" class="govuk-button" data-module="govuk-button">
+        Download data as CSV
+      </button>
+      <button name="json" type="submit" class="govuk-button" data-module="govuk-button">
+        Download data as JSON
+      </button>
+    </div>
+  </form>
+{% endblock %}

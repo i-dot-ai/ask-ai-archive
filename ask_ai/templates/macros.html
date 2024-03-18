@@ -1,0 +1,172 @@
+{% macro input(name, label, data={}, errors={}, type="text") -%}
+  <div class="govuk-form-group {{errors.get(name) and 'govuk-form-group--error' or ''}}">
+    <label class="govuk-label" for="question-{{name}}">
+      {{label}}
+    </label>
+    {% if errors.get(name) %}
+      <p id="question-{{name}}-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> {{errors.get(name)}}
+      </p>
+      <input class="govuk-input govuk-input--error" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off" value="{{data.get(name, '')}}">
+    {% else %}
+      <input class="govuk-input" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off" value="{{data.get(name, '')}}">
+    {% endif %}
+  </div>
+{%- endmacro%}
+
+
+{% macro textarea_chat(name, label, hint="", data={}, errors={}, type="text", rows=5, required=true, hideLabel=false) -%}
+  <div class="govuk-form-group {{errors.get(name) and 'govuk-form-group--error' or ''}}">
+    <label class="govuk-label {% if hideLabel %}govuk-visually-hidden{% endif %}" for="question-{{name}}">
+      {{label}}
+    </label>
+    <div id="{{name}}-hint" class="govuk-hint">
+      {{hint}}
+    </div>
+    {% if errors.get(name) %}
+      <p id="question-{{name}}-error" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> {{errors.get(name)}}
+      </p>
+      <textarea {% if required %}required{% endif %} class="govuk-textarea govuk-input--error" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off">{{data.get(name, '')}}</textarea>
+    {% else %}
+      <textarea {% if required %}required{% endif %} class="govuk-textarea" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off">{{data.get(name, '')}}</textarea>
+    {% endif %}
+  </div>
+{%- endmacro%}
+
+
+{% macro textarea(name, label, hint="", data={}, errors={}, type="text") -%}
+  <div class="govuk-form-group {{errors.get(name) and 'govuk-form-group--error' or ''}}">
+    <fieldset class="govuk-fieldset">
+      <h2 class="govuk-label-wrapper">
+        <label class="govuk-label--m" for="question-{{name}}">
+          {{label}}
+        </label>
+      </h2>
+      <div id="{{name}}-hint" class="govuk-hint">
+        {{hint}}
+      </div>
+      {% if errors.get(name) %}
+        <p id="question-{{name}}-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{errors.get(name)}}
+        </p>
+        <textarea class="govuk-textarea govuk-input--error" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off" rows="10">{{data.get(name, '')}}</textarea>
+      {% else %}
+        <textarea class="govuk-textarea" id="question-{{name}}" name="{{name}}" type="{{type}}" {% if errors.get(name) %} aria-describedby="question-{{name}}-error" {% endif %} autocomplete="off" rows="10">{{data.get(name, '')}}</textarea>
+      {% endif %}
+    </fieldset>
+  </div>
+{%- endmacro%}
+
+
+{% macro warning(msg, link_text="", page_url="") %}
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Warning</span>
+      {% if page_url %}
+        {{msg}} <a href="{{url(page_url)}}">{{link_text}}</a>
+      {% else %}
+        {{msg}}
+      {% endif %}
+    </strong>
+  </div>
+{%- endmacro%}
+
+
+{% macro open_ai_api_error() %}
+  <div class="govuk-error-summary" data-module="govuk-error-summary">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            <a href="#">There was an issue accessing ChatGPT - please try again</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{%- endmacro%}
+
+
+{% macro checkboxes(title, options, data, errors) -%}
+  <div class="govuk-form-group {{errors and 'govuk-form-group--error' or ''}}">
+    <fieldset class="govuk-fieldset" aria-describedby="countries-error">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          {{title}}
+        </h1>
+      </legend>
+      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+        {% for option in options %}
+          {% if errors.get(option.name) %}
+            <p id="question-{{option.name}}-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{errors.get(option.name)}}
+            </p>
+          {% endif %}
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="{{option.name}}" name="{{option.name}}" type="checkbox" value=True {{is_checked(data, option.name)}} aria-describedby="{{option.name}}-hint">
+            <label class="govuk-label govuk-checkboxes__label" for="{{option.name}}-option-{{slugify(value)}}">
+              {{option.label|safe}}
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+  </div>
+{%- endmacro%}
+
+
+{% macro start_new_query() -%}
+  <a href={{url("new-chat")}} role="button" draggable="false" class="govuk-button govuk-button--start plausible-event-name=New+Chat" data-module="govuk-button">
+    Ask a new query
+    <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+    </svg>
+  </a>
+{%- endmacro%}
+
+
+{% macro radios(name, question, options, data, errors) -%}
+  <div class="govuk-form-group {{errors.get(name) and 'govuk-form-group--error' or ''}}">
+    <fieldset class="govuk-fieldset">
+      {% if errors.get(name) %}
+        <p id="question-{{name}}-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{errors.get(name)}}
+        </p>
+      {% endif %}
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        <h2 class="govuk-fieldset__heading">
+          {{question}}
+        </h2>
+      </legend>
+      <div id="question-{{name}}" class="govuk-radios" data-module="govuk-radios">
+        {% for option in options %}
+          {% if option is string %}
+            {% set value, label = option, option %}
+          {% elif option is mapping %}
+            {% set value, label = option.value, option.label %}
+          {% else %}
+            {% set value, label = option %}
+          {% endif %}
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="{{name}}-option-{{slugify(value)}}" name="{{name}}" type="radio" value="{{value}}" {{is_checked(data, name)}} aria-describedby="{{name}}-option-{{slugify(value)}}-hint">
+            <label class="govuk-label govuk-radios__label" for="{{name}}-option-{{slugify(value)}}">
+              {{label}}
+            </label>
+            {% if option is mapping %}
+              {% if option.hint %}
+                <div id="{{name}}-option-{{slugify(value)}}-hint" class="govuk-hint govuk-radios__hint">
+                  {{option.hint}}
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+  </div>
+{%- endmacro%}
