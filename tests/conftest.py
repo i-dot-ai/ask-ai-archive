@@ -1,11 +1,8 @@
-import base64
-import json
 from datetime import datetime
 from unittest.mock import MagicMock
 
 import pytest
 import pytz
-from django.conf import settings
 from django.contrib.auth.models import Group
 from freezegun import freeze_time
 
